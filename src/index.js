@@ -9,11 +9,13 @@ import addContactReducer from "./store/reducers/addContactReducer";
 import thunkMiddleware from 'redux-thunk';
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
+import contactsReducer from "./store/reducers/contactsReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers( {
   addContact: addContactReducer,
+  contacts: contactsReducer,
 });
 
 const store = createStore (
