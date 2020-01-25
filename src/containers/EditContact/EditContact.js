@@ -7,24 +7,28 @@ class EditContact extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.contact.name,
-      phone: this.props.contact.phone,
-      email:this.props.contact.email,
-      photo: this.props.contact.photo,
-      id: this.props.match.params.id,
+      name: '',
+      phone: '',
+      email:'',
+      photo: '',
+      id: ''
     };
   }
 
 
-  async componentDidMount() {
-    await this.props.loadContact(this.state.id);
+  componentDidMount() {
+    let id = this.props.match.params.id;
+    this.props.loadContact(id);
   }
 
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   if(prevProps !== this.state) {
-  //     return this.props.loadContact(this.state.id);
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      console.log(prevProps.match.params.id);
+      let id = this.props.match.params.id;
+      this.props.loadContact(id);
+    }
+  }
 
   handleFormSubmit = async e => {
     e.preventDefault();
@@ -46,32 +50,32 @@ class EditContact extends Component {
       <FormGroup>
         <Label for="name">Name</Label>
         <Input type="text" name="name"
-               value={this.state.name}
+               value={this.props.contact.name}
                onChange={this.handleInputChange}
                id="name" required/>
       </FormGroup>
       <FormGroup>
         <Label for="phone">Phone</Label>
         <Input type="phone" name="phone"
-               value={this.state.phone}
+               value={this.props.contact.phone}
                onChange={this.handleInputChange}
                id="phone" required/>
       </FormGroup>
       <FormGroup>
         <Label for="email">E-mail</Label>
         <Input type="email" name="email"
-               value={this.state.email}
+               value={this.props.contact.email}
                onChange={this.handleInputChange}
                id="email" required/>
       </FormGroup>
       <FormGroup>
         <Label for="photo">Photo</Label>
         <Input type="text" name="photo"
-               value={this.state.photo}
+               value={this.props.contact.photo}
                onChange={this.handleInputChange}
                id="photo" required/>
       </FormGroup>
-            <img src={this.state.photo}
+            <img src={this.props.contact.photo}
                  style={{width: '80px', height: '80px', objectFit: 'cover'}}
                   alt={'avatar'}/>
       <FormGroup>
