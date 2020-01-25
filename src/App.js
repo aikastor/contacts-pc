@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment} from 'react';
+import Navigation from "./components/UI/Navigation/Navigation";
+import {Container} from "reactstrap";
+import {Route, Switch} from "react-router";
+import Contacts from "./containers/Contacts/Contacts";
+import EditContact from "./containers/EditContact/EditContact";
+import AddContact from "./containers/AddContact/AddContact";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Fragment>
+        <Navigation/>
+        <Container>
+          <Switch>
+            <Route path='/'  exact component={Contacts}/>
+            <Route path='/add/' exact component={AddContact}/>
+            <Route path='contacts/:id/edit/' component={EditContact}/>
+            <Route render={()=> <h2>Page not found</h2>}/>
+          </Switch>
+        </Container>
+      </Fragment>
   );
-}
+};
 
 export default App;
