@@ -16,14 +16,13 @@ class EditContact extends Component {
   }
 
 
-  componentDidMount() {
-    this.props.loadContact(this.props.match.params.id);
-
+  async componentDidMount() {
+    await this.props.loadContact(this.state.id);
   }
 
   // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   if(prevState !== this.state) {
-  //     return this.props.loadContact(this.props.match.params.id);
+  //   if(prevProps !== this.state) {
+  //     return this.props.loadContact(this.state.id);
   //   }
   // }
 
