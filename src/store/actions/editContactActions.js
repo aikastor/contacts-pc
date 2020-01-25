@@ -9,7 +9,7 @@ export const fetchSingleContact = (contactID) => {
   return async dispatch => {
     try {
       dispatch (editContactRequest());
-      const response = await axiosApi.get(`/contacts2.${contactID}json`);
+      const response = await axiosApi.get(`/contacts2/${contactID}.json`);
       dispatch(editContactSuccess(response.data))
     }  catch (e) {
       dispatch(editContactFailure(e))
@@ -17,12 +17,12 @@ export const fetchSingleContact = (contactID) => {
   }
 };
 
-export const editContact = (contactID,newContact) => {
+export const editContact = (contactID, newContact) => {
   return async dispatch => {
     try {
       dispatch(editContactRequest());
-      await axiosApi.patch(`/contacts2.${contactID}json`, newContact);
-      dispatch(fetchSingleContact())
+      await axiosApi.patch(`/contacts2/${contactID}.json`, newContact);
+      dispatch(fetchSingleContact(contactID))
     } catch (e) {
       dispatch(editContactFailure(e))
     }

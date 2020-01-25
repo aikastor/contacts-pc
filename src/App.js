@@ -12,8 +12,8 @@ const App = () => {
         <Navigation/>
         <Container>
           <Switch>
-            <Route path='contacts/edit/' exact component={EditContact}/>
             <Route path='/' exact component={Contacts}/>
+            <Route path='/contacts/:id/edit/' exact component={EditContact}/>
             <Route path='/add/' exact component={AddContact}/>
           </Switch>
         </Container>

@@ -57,6 +57,7 @@ class Contacts extends Component {
               >
                 <img src={this.props.contacts[item].photo}
                      style={{width: '80px', height: '80px', objectFit: 'cover'}}
+                     alt={'avatar'}
                 />
                 <p>{this.props.contacts[item].name}</p>
               </ListGroupItem>
@@ -73,6 +74,7 @@ class Contacts extends Component {
             <ModalBody>
               <img src={this.state.currentContactInfo.photo}
                    style={{width: '80px', height: '80px', objectFit: 'cover'}}
+                   alt={'avatar'}
               />
               <p>{this.state.currentContactInfo.name}</p>
               <p>{this.state.currentContactInfo.phone}</p>
@@ -81,7 +83,7 @@ class Contacts extends Component {
             <ModalFooter>
               <Button style={{marginRight: '5px'}}
                       tag={Link}
-                      to={`/contacts/edit/`}
+                      to={`/contacts/${this.state.currentContactId}/edit`}
                       color='primary'
               >
                 Edit >>
@@ -89,13 +91,6 @@ class Contacts extends Component {
               <Button color="danger" onClick={this.onDeleting}>Delete</Button>
             </ModalFooter>
           </Modal>
-          <Button style={{marginRight: '5px'}}
-                  tag={Link}
-                  to={`/contacts/edit/`}
-                  color='primary'
-          >
-            Edit >>
-          </Button>
         </Fragment>
 
     );
