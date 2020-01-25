@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {deleteContact, fetchContacts} from "../../store/actions/contactsActions";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {
   Button,
@@ -8,9 +8,11 @@ import {
   Modal,
   ModalBody,
   ModalFooter,
-  ModalHeader,
   Spinner
 } from "reactstrap";
+
+import {deleteContact, fetchContacts} from "../../store/actions/contactsActions";
+
 
 class Contacts extends Component {
   state ={
@@ -21,9 +23,13 @@ class Contacts extends Component {
   componentDidMount() {
     this.props.loadContacts();
   }
-  showContactModal = (contactData, contactId) => {
-    let contactInfo = {...this.state.currentContactInfo};
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.match.params !== prevProps.match.params) {
+  //     return this.props.loadContacts();
+  //   }
+  // }
 
+  showContactModal = (contactData, contactId) => {
     this.setState({
       currentContactInfo: contactData,
       currentContactId: contactId,
@@ -45,7 +51,10 @@ class Contacts extends Component {
     let data = (
         <ListGroup>
           {Object.keys(this.props.contacts).map(item => (
-              <ListGroupItem onClick={()=>this.showContactModal(this.props.contacts[item], item)}>
+              <ListGroupItem
+                  onClick={()=>this.showContactModal(this.props.contacts[item], item)}
+                  key={item}
+              >
                 <img src={this.props.contacts[item].photo}
                      style={{width: '80px', height: '80px', objectFit: 'cover'}}
                 />
@@ -70,9 +79,23 @@ class Contacts extends Component {
               <p>{this.state.currentContactInfo.email}</p>
             </ModalBody>
             <ModalFooter>
-              <Button color="secondary" onClick={this.onDeleting}>Delete</Button>
+              <Button style={{marginRight: '5px'}}
+                      tag={Link}
+                      to={`/contacts/edit/`}
+                      color='primary'
+              >
+                Edit >>
+              </Button>
+              <Button color="danger" onClick={this.onDeleting}>Delete</Button>
             </ModalFooter>
           </Modal>
+          <Button style={{marginRight: '5px'}}
+                  tag={Link}
+                  to={`/contacts/edit/`}
+                  color='primary'
+          >
+            Edit >>
+          </Button>
         </Fragment>
 
     );
